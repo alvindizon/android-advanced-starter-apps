@@ -13,7 +13,7 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SimpleFragment extends Fragment
+public class SimpleFragment extends Fragment {
 
     private static final int YES = 0;
     private static final int NO = 1;

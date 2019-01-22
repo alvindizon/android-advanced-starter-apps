@@ -82,7 +82,7 @@ proguard/
 Thumbs.db
 
 #generated build folder on "app" folder 
-/app/build
+*/app/build
 
 #impl build files
 *.iml
