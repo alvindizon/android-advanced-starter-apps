@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
+    private boolean mTwoPane = false;
 
     /**
      * Sets up a song list as a RecyclerView.
@@ -62,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.song_list);
         recyclerView.setAdapter
                 (new SimpleItemRecyclerViewAdapter(SongUtils.SONG_ITEMS));
+
+        //  The song_detail_container view for MainActivity will be present only if
+        // the screen's width is 900dp or larger, because it is defined only in the
+        // song_list.xml (w900dp) layout, not in the default song_list.xml layout
+        // for smaller screen sizes. If this view is present, then the
+        // Activity should be in two-pane mode.
+        if(findViewById(R.id.song_detail_container) != null) {
+            mTwoPane = true;
+        }
     }
 
     /**
