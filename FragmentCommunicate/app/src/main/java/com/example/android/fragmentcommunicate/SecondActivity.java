@@ -32,6 +32,8 @@ public class SecondActivity extends AppCompatActivity
     private Boolean isFragmentDisplayed = false;
     // key used to save the isFragmentDisplayed value over configuration changes
     static final String STATE_FRAGMENT = "state_of_fragment";
+    // default choice is 2 (none)
+    private int mRadioButtonChoice = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class SecondActivity extends AppCompatActivity
     }
 
     public void displayFragment() {
-        SimpleFragment simpleFragment = SimpleFragment.newInstance();
+        SimpleFragment simpleFragment = SimpleFragment.newInstance(mRadioButtonChoice);
         // get the FragmentManager and start a transaction
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

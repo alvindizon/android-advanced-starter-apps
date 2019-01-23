@@ -23,13 +23,18 @@ public class SimpleFragment extends Fragment {
     private static final int NONE = 2;
     public int mRadioButtonChoice = NONE;
     OnFragmentInteractionListener mListener;
+    private static final String CHOICE = "choice";
 
     public SimpleFragment() {
         // Required empty public constructor
     }
 
-    public static SimpleFragment newInstance() {
-        return new SimpleFragment();
+    public static SimpleFragment newInstance(int choice) {
+        SimpleFragment simpleFragment = new SimpleFragment();
+        Bundle args = new Bundle();
+        args.putInt(CHOICE, choice);
+        simpleFragment.setArguments(args);
+        return simpleFragment;
     }
 
     interface OnFragmentInteractionListener {
@@ -44,6 +49,15 @@ public class SimpleFragment extends Fragment {
                 inflater.inflate(R.layout.fragment_simple, container, false);
         final RadioGroup radioGroup =
                 rootView.findViewById(R.id.radio_group);
+
+        // display previous choice when fragment is reopened
+        if(getArguments().containsKey(CHOICE)) {
+            mRadioButtonChoice = getArguments().getInt(CHOICE);
+            if(mRadioButtonChoice != NONE) {
+                radioGroup.check(
+                        radioGroup.getChildAt(mRadioButtonChoice).getId());
+            }
+        }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
