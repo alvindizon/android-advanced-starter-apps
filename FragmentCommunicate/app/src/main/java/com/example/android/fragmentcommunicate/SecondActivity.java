@@ -22,8 +22,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity
+    implements SimpleFragment.OnFragmentInteractionListener{
 
     private Button mButton;
     private Button mPrevButton;
@@ -110,6 +112,13 @@ public class SecondActivity extends AppCompatActivity {
         // save the state of the fragment (true = open, false = closed)
         savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRadioButtonChoice(int choice) {
+        mRadioButtonChoice = choice;
+        String toastMsg = "Choice is " + Integer.toString(choice);
+        Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
     }
 
 }

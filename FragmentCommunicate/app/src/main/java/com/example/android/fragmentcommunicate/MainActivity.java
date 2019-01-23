@@ -23,14 +23,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements SimpleFragment.OnFragmentInteractionListener{
 
     private Button mButton;
     private Button mNextButton;
     private Boolean isFragmentDisplayed = false;
     // key used to save the isFragmentDisplayed value over configuration changes
     static final String STATE_FRAGMENT = "state_of_fragment";
+    // default choice is 2 (none)
+    private int mRadioButtonChoice = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,4 +117,11 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+
+    @Override
+    public void onRadioButtonChoice(int choice) {
+        mRadioButtonChoice = choice;
+        String toastMsg = "Choice is " + Integer.toString(choice);
+        Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+    }
 }
