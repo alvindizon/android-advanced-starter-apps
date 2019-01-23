@@ -3,11 +3,14 @@ package com.example.android.fragmentexample1;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -48,6 +51,16 @@ public class SimpleFragment extends Fragment {
                     default: // no choice made
                         break;
                 }
+            }
+        });
+
+        final RatingBar ratingBar = rootView.findViewById(R.id.rating_bar);
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                String myRating = "My rating" + rating;
+                Toast.makeText(getActivity(), myRating, Toast.LENGTH_SHORT ).show();
             }
         });
 
