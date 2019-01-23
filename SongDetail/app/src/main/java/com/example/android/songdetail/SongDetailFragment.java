@@ -2,6 +2,7 @@ package com.example.android.songdetail;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,23 @@ public class SongDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static SongDetailFragment newInstance(int songId) {
+        SongDetailFragment fragment = new SongDetailFragment();
+        Bundle args = new Bundle();
+        args.putInt(SongUtils.SONG_ID_KEY, songId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments().containsKey(SongUtils.SONG_ID_KEY)) {
+            // load the content specified by the fragment arguments
+            mSong = SongUtils.SONG_ITEMS.get(getArguments()
+                        .getInt(SongUtils.SONG_ID_KEY));
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

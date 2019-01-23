@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,12 +119,23 @@ public class MainActivity extends AppCompatActivity {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context,
-                            SongDetailActivity.class);
-                    intent.putExtra(SongUtils.SONG_ID_KEY,
-                            holder.getAdapterPosition());
-                    context.startActivity(intent);
+                    int songId = holder.getAdapterPosition();
+                    // if screen is wide enough, display details using fragment
+                    // else, start new detail activity
+                    if(mTwoPane) {
+                        Log.d("start fragment", "songId: " + songId);
+                        SongDetailFragment fragment = SongDetailFragment.newInstance(songId);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.song_detail_container, fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        Log.d("start activity", "songId: " + songId);
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, SongDetailActivity.class);
+                        intent.putExtra(SongUtils.SONG_ID_KEY, songId);
+                        context.startActivity(intent);
+                    }
                 }
             });
         }
