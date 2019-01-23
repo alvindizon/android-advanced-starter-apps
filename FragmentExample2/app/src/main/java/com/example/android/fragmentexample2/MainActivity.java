@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         //  add the simple fragment
         fragmentTransaction.add(R.id.fragment_container,
-                simpleFragment).addToBackStack(null).commit();
+                simpleFragment).commit();
         // update button text
         mButton.setText(R.string.close);
         // set flag to indicate fragment is open.
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // save the state of the fragment (true = open, false = closed)
         savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
