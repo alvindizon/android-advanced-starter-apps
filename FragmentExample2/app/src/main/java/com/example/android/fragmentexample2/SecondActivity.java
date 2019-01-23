@@ -16,7 +16,6 @@
 
 package com.example.android.fragmentexample2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,10 +23,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
     private Button mButton;
-    private Button mNextButton;
     private Boolean isFragmentDisplayed = false;
     // key used to save the isFragmentDisplayed value over configuration changes
     static final String STATE_FRAGMENT = "state_of_fragment";
@@ -35,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
         mButton = findViewById(R.id.open_button);
-        mNextButton = findViewById(R.id.next_button);
         // on config change, onCreate is called to redraw the UI. In this case, we need to
         // check the saved value of isFragmentDisplayed so that
         // the appropriate button label is applied
@@ -56,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     closeFragment();
                 }
-            }
-        });
-
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startSecondActivity();
             }
         });
     }
@@ -99,11 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-    }
-
-    private void startSecondActivity() {
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
     }
 
     @Override
