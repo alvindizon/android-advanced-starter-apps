@@ -26,6 +26,7 @@ import android.widget.Button;
 public class SecondActivity extends AppCompatActivity {
 
     private Button mButton;
+    private Button mPrevButton;
     private Boolean isFragmentDisplayed = false;
     // key used to save the isFragmentDisplayed value over configuration changes
     static final String STATE_FRAGMENT = "state_of_fragment";
@@ -36,6 +37,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         mButton = findViewById(R.id.open_button);
+        mPrevButton = findViewById(R.id.previous_button);
         // on config change, onCreate is called to redraw the UI. In this case, we need to
         // check the saved value of isFragmentDisplayed so that
         // the appropriate button label is applied
@@ -53,6 +55,13 @@ public class SecondActivity extends AppCompatActivity {
                 } else {
                     closeFragment();
                 }
+            }
+        });
+
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnToMainActivity();
             }
         });
     }
@@ -90,6 +99,11 @@ public class SecondActivity extends AppCompatActivity {
 
         }
     }
+
+    private void returnToMainActivity() {
+        finish();
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
